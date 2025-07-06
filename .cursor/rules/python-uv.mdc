@@ -1,0 +1,5 @@
+---
+description: when working with python, always use uv.
+globs:
+alwaysApply: false
+---
