@@ -1,0 +1,24 @@
+{
+  "watch_dirs": [
+    "src"
+  ],
+  "test_dir": "tests",
+  "working_set_dir": "tests/working_set",
+  "watch_extensions": [
+    ".py",
+    ".js",
+    ".ts",
+    ".jsx",
+    ".tsx",
+    ".go",
+    ".rs",
+    ".java",
+    ".cpp",
+    ".c",
+    ".h"
+  ],
+  "agent_mission": "testing",
+  "error_report_file": "tests/working_set/error_report.jsonl",
+  "claude_timeout": 300,
+  "claude_log_file": "tests/working_set/claude_logs.jsonl"
+}

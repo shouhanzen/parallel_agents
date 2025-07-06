@@ -1,0 +1,74 @@
+[run]
+# Coverage configuration
+
+# Source directories to measure
+source = verifier,src
+
+# Files to omit from coverage
+omit = 
+    */tests/*
+    */test_*
+    */__pycache__/*
+    */venv/*
+    */env/*
+    .venv/*
+    setup.py
+    */mock_*
+    */demo.py
+
+# Enable branch coverage
+branch = True
+
+# Parallel processing
+parallel = True
+
+[report]
+# Reporting options
+
+# Precision for percentages
+precision = 2
+
+# Show missing lines
+show_missing = True
+
+# Skip covered files in report
+skip_covered = False
+
+# Skip empty files
+skip_empty = True
+
+# Fail if coverage is below this percentage
+fail_under = 80
+
+# Exclude lines from coverage
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+    
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+    
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+    
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == .__main__.:
+    
+    # Don't complain about abstract methods
+    @(abc\.)?abstractmethod
+
+[html]
+# HTML reporting options
+directory = htmlcov
+title = Verifier Test Coverage Report
+
+[xml]
+# XML reporting options
+output = coverage.xml
+
+[json]
+# JSON reporting options  
+output = coverage.json
