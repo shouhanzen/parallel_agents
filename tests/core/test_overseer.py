@@ -5,11 +5,16 @@ import pytest
 import asyncio
 import tempfile
 import time
+import sys
 from pathlib import Path
 from unittest.mock import Mock, patch, AsyncMock, MagicMock
-from src.overseer import Overseer
-from src.config import VerifierConfig
-from src.delta_gate import DeltaGateConfig
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from core.overseer.overseer import Overseer
+from core.config.models import VerifierConfig
+from core.monitoring.delta_gate import DeltaGateConfig
 
 pytestmark = pytest.mark.asyncio
 
@@ -68,7 +73,7 @@ class TestOverseer:
             config = VerifierConfig(watch_dirs=[temp_dir])
             overseer = Overseer(config)
             
-            with patch('src.overseer.FilesystemWatcher') as mock_watcher_class:
+            with patch('core.overseer.overseer.FilesystemWatcher') as mock_watcher_class:
                 mock_watcher = Mock()
                 mock_watcher_class.return_value = mock_watcher
                 
@@ -236,7 +241,7 @@ class TestOverseer:
 class TestOverseerIntegration:
     """Integration tests for the Overseer class"""
     
-    @patch('src.overseer.FilesystemWatcher')
+    @patch('core.overseer.overseer.FilesystemWatcher')
     async def test_start_and_stop_cycle(self, mock_watcher_class):
         """Test complete start and stop cycle"""
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -360,7 +365,7 @@ class TestOverseerIntegration:
                     mock_display.assert_any_call(mock_reports[0])
                     mock_display.assert_any_call(mock_reports[1])
                     
-    @patch('src.overseer.FilesystemWatcher')
+    @patch('core.overseer.overseer.FilesystemWatcher')
     async def test_multiple_watchers(self, mock_watcher_class):
         """Test overseer with multiple watch directories"""
         with tempfile.TemporaryDirectory() as temp_dir1:

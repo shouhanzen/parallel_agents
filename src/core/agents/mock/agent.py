@@ -3,8 +3,8 @@ import json
 import os
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from .config import VerifierConfig
-from .working_set import WorkingSetManager
+from ...config.models import VerifierConfig
+from ...monitoring.working_set import WorkingSetManager
 
 
 class MockVerifierAgent:

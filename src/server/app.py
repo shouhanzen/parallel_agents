@@ -5,7 +5,7 @@ FastAPI server for Parallel Agents
 import asyncio
 import json
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, List, Optional, Any
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -13,10 +13,10 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from ..core.config.models import VerifierConfig
-from ..core.agents.factory import create_agent
-from ..core.overseer.overseer import Overseer
-from ..core.overseer.mock_overseer import MockOverseer
+from core.config.models import VerifierConfig
+from core.agents.factory import create_agent
+from core.overseer.overseer import Overseer
+from core.overseer.mock_overseer import MockOverseer
 
 
 class ServerConfig(BaseModel):
@@ -304,3 +304,9 @@ async def start_server(host: str = "localhost", port: int = 8000, debug: bool = 
     uvicorn.run(server.app, host=host, port=port, log_level=config.log_level.lower())
     
     return server 
+
+
+# Module-level exports for testing
+server = get_server()
+app = server.app
+agent_sessions = server.sessions 

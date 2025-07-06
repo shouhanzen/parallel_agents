@@ -10,9 +10,120 @@ from dataclasses import dataclass
 from datetime import datetime
 
 try:
-    from .models import VerifierConfig
+    from .models import VerifierConfig, ParallelAgentsConfig
 except ImportError:
-    from models import VerifierConfig
+    from models import VerifierConfig, ParallelAgentsConfig
+
+
+# New profile system for ParallelAgentsConfig
+PARALLEL_PROFILES = {
+    "testing": {
+        "description": "Optimized for testing and development",
+        "config": {
+            "code_tool": "goose",
+            "agent_mission": "Generate and verify tests for the codebase",
+            "log_level": "DEBUG",
+            "max_iterations": 3,
+            "timeout": 120,
+            "goose_timeout": 300,
+            "goose_log_file": "tests/goose_testing.log"
+        }
+    },
+    
+    "documentation": {
+        "description": "Optimized for documentation generation",
+        "config": {
+            "code_tool": "goose",
+            "agent_mission": "Generate comprehensive documentation for the codebase including API docs, examples, and guides",
+            "log_level": "INFO",
+            "max_iterations": 5,
+            "timeout": 300,
+            "goose_timeout": 600,
+            "goose_log_file": "docs/goose_docs.log"
+        }
+    },
+    
+    "demo": {
+        "description": "Demo mode with mock agents for presentations",
+        "config": {
+            "code_tool": "mock",
+            "agent_mission": "Demonstrate parallel agents capabilities",
+            "log_level": "INFO",
+            "max_iterations": 3,
+            "timeout": 60,
+            "goose_timeout": 120,
+            "goose_log_file": "demo/mock_demo.log"
+        }
+    },
+    
+    "minimal": {
+        "description": "Minimal configuration for small projects",
+        "config": {
+            "code_tool": "goose",
+            "agent_mission": "Provide basic code assistance",
+            "log_level": "WARNING",
+            "max_iterations": 2,
+            "timeout": 60,
+            "goose_timeout": 180,
+            "goose_log_file": "minimal.log"
+        }
+    },
+    
+    "full_stack": {
+        "description": "Full-featured configuration for large projects",
+        "config": {
+            "code_tool": "goose",
+            "agent_mission": "Comprehensive code analysis, testing, and documentation for full-stack applications",
+            "log_level": "INFO",
+            "max_iterations": 10,
+            "timeout": 600,
+            "goose_timeout": 1200,
+            "goose_log_file": "full_stack/goose.log"
+        }
+    }
+}
+
+
+def get_profile(profile_name: str) -> Optional[ParallelAgentsConfig]:
+    """Get a configuration profile by name"""
+    if profile_name not in PARALLEL_PROFILES:
+        return None
+    
+    profile_data = PARALLEL_PROFILES[profile_name]
+    return ParallelAgentsConfig.from_dict(profile_data["config"])
+
+
+def list_profiles() -> Dict[str, Dict[str, Any]]:
+    """List all available configuration profiles"""
+    return {
+        name: {
+            "description": profile["description"],
+            "config": profile["config"]
+        }
+        for name, profile in PARALLEL_PROFILES.items()
+    }
+
+
+def get_profile_info(profile_name: str) -> Optional[Dict[str, Any]]:
+    """Get detailed information about a specific profile"""
+    if profile_name not in PARALLEL_PROFILES:
+        return None
+    
+    return PARALLEL_PROFILES[profile_name]
+
+
+def create_custom_profile(name: str, description: str, config: Dict[str, Any]) -> ParallelAgentsConfig:
+    """Create a custom configuration profile"""
+    # Validate the config by creating a ParallelAgentsConfig from it
+    parallel_config = ParallelAgentsConfig.from_dict(config)
+    
+    # Add to the profiles (runtime only, not persisted)
+    PARALLEL_PROFILES[name] = {
+        "description": description,
+        "config": config
+    }
+    
+    return parallel_config
 
 
 @dataclass

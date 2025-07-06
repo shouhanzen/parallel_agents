@@ -4,8 +4,13 @@
 import pytest
 import tempfile
 import json
+import sys
 from pathlib import Path
-from src.working_set import WorkingSetManager
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from core.monitoring.working_set import WorkingSetManager
 
 
 class TestWorkingSetManager:

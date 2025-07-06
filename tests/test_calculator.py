@@ -2,7 +2,13 @@
 """Unit tests for the calculator module"""
 
 import pytest
-from src.calculator import add, subtract, multiply
+import sys
+from pathlib import Path
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from utils.calculator import add, subtract, multiply
 
 
 class TestCalculatorFunctions:

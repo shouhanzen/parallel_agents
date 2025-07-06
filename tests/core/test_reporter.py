@@ -5,9 +5,14 @@ import pytest
 import tempfile
 import json
 import time
+import sys
 from pathlib import Path
 from datetime import datetime, timezone
-from src.reporter import ErrorReporter, ReportMonitor
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from core.review.reporter import ErrorReporter, ReportMonitor
 
 
 class TestErrorReporter:

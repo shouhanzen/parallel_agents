@@ -3,10 +3,11 @@ Working set management API routes
 """
 
 from typing import Dict, Any
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pathlib import Path
 
-from ...core.monitoring.working_set import WorkingSetManager
+from core.monitoring.working_set import WorkingSetManager
+from server.app import get_server, ParallelAgentsServer
 
 
 router = APIRouter()

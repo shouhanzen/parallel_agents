@@ -2,12 +2,12 @@ import asyncio
 import time
 from pathlib import Path
 from typing import Dict, List, Any
-from .config import VerifierConfig
-from .watcher import FilesystemWatcher
-from .mock_agent import MockVerifierAgent
-from .reporter import ReportMonitor
-from .delta_gate import DeltaGate, DeltaGateConfig
-from .working_set import WorkingSetManager
+from ..config.models import VerifierConfig
+from ..monitoring.watcher import FilesystemWatcher
+from ..agents.mock.agent import MockVerifierAgent
+from ..review.reporter import ReportMonitor
+from ..monitoring.delta_gate import DeltaGate, DeltaGateConfig
+from ..monitoring.working_set import WorkingSetManager
 
 
 class MockOverseer:

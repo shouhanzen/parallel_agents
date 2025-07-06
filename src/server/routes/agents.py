@@ -6,8 +6,8 @@ from typing import Dict, Any, Optional
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 
-from ...core.config.models import VerifierConfig
-from ..app import get_server, ParallelAgentsServer
+from core.config.models import VerifierConfig
+from server.app import get_server, ParallelAgentsServer
 
 
 router = APIRouter()

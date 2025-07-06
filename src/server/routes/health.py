@@ -1,12 +1,14 @@
 """
-Health check API routes
+Health check and system status API routes
 """
 
 from typing import Dict, Any
-from fastapi import APIRouter, Depends
-from datetime import datetime
+from fastapi import APIRouter, HTTPException, Depends
+from datetime import datetime, timezone
+import psutil
+import sys
 
-from ..app import get_server, ParallelAgentsServer
+from server.app import get_server, ParallelAgentsServer
 
 
 router = APIRouter()

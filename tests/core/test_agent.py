@@ -5,10 +5,16 @@ import pytest
 import tempfile
 import asyncio
 import json
+import sys
 from pathlib import Path
 from unittest.mock import Mock, patch, AsyncMock
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from core.agents.factory import create_verifier_agent
+from core.config.models import ParallelAgentsConfig as VerifierConfig
 from src.agent import VerifierAgent
-from src.config import VerifierConfig
 
 
 class TestVerifierAgent:

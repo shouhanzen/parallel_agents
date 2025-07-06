@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
 from abc import ABC, abstractmethod
-from .config import VerifierConfig
+from ..config.models import VerifierConfig
 
 
 class BaseAgent(ABC):

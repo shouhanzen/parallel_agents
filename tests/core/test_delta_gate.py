@@ -4,8 +4,13 @@
 import pytest
 import tempfile
 import time
+import sys
 from pathlib import Path
-from src.delta_gate import DeltaGate, DeltaGateConfig, FileChange
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from core.monitoring.delta_gate import DeltaGate, DeltaGateConfig, FileChange
 
 
 class TestFileChange:

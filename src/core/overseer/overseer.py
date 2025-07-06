@@ -2,13 +2,13 @@ import asyncio
 import time
 from pathlib import Path
 from typing import Dict, List, Any
-from .config import VerifierConfig
-from .watcher import FilesystemWatcher
-from .agent import VerifierAgent
-from .doc_agent import DocumentationAgent
-from .reporter import ReportMonitor
-from .delta_gate import DeltaGate, DeltaGateConfig
-from .working_set import WorkingSetManager
+from ..config.models import VerifierConfig
+from core.monitoring.watcher import FilesystemWatcher
+from core.agents.mock.agent import MockVerifierAgent as VerifierAgent
+from core.agents.mock.agent import MockVerifierAgent as DocumentationAgent
+from core.review.reporter import ReportMonitor
+from ..monitoring.delta_gate import DeltaGate, DeltaGateConfig
+from ..monitoring.working_set import WorkingSetManager
 
 
 class Overseer:

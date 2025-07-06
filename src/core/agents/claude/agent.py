@@ -3,11 +3,11 @@ import json
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any
-from .code_agent import CodeAgent
-from .config import VerifierConfig
+from ..base import BaseAgent
+from ...config.models import VerifierConfig
 
 
-class ClaudeCodeAgent(CodeAgent):
+class ClaudeCodeAgent(BaseAgent):
     """Agent that interfaces with Claude Code to generate and run code"""
     
     def __init__(self, config: VerifierConfig, agent_type: str):
@@ -172,7 +172,7 @@ Please analyze these changes and process them according to your mission.
             raise RuntimeError(error)
         finally:
             # Log the interaction regardless of success or failure
-            self._log_code_interaction(prompt, response, success, error)
+            self._log_claude_interaction(prompt, response, success, error)
 
 
 class ClaudeCodeVerifierAgent(ClaudeCodeAgent):
