@@ -18,7 +18,10 @@
     ".h"
   ],
   "agent_mission": "testing",
+  "code_tool": "goose",
   "error_report_file": "tests/working_set/error_report.jsonl",
   "claude_timeout": 300,
-  "claude_log_file": "tests/working_set/claude_logs.jsonl"
+  "claude_log_file": "tests/working_set/claude_logs.jsonl",
+  "goose_timeout": 300,
+  "goose_log_file": "tests/working_set/goose_logs.jsonl"
 }
